@@ -1,0 +1,29 @@
+
+PRAGMA user_version = 1;
+
+CREATE TABLE Character (
+    id_character INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT,
+    image_url TEXT
+);
+
+selectAllCharacters:
+    SELECT *
+    FROM Character;
+
+selectCharactersByName:
+    SELECT
+        name,
+        description,
+        image_url
+    FROM Character
+    WHERE name LIKE ('% ' || :name)
+    OR name LIKE(:name || ' %');
+
+insertCharacter:
+    INSERT INTO Character(id_character, name, description, image_url)
+    VALUES (?, ?,?,?);
+
+deleteAll:
+    DELETE FROM Character;
